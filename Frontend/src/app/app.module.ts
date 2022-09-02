@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from "../environments/environment";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './account/components/login-component/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { LoginComponent } from './account/components/login-component/login.compo
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'user', loadChildren: () => import('./user/user.module').then(e => e.UserModule) }
+      { path: 'user', loadChildren: () => import('./user/user.module').then(e => e.UserModule), canActivate: [AuthGuard] }
     ]),
     JwtModule.forRoot({
       config: {

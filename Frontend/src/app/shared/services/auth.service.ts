@@ -18,7 +18,7 @@ export class AuthService {
       })
     });
   }
-  isUserAuthenticated() {
+  isUserAuthenticated(): boolean {
     let token = localStorage.getItem("jwt");
     return token && !this.jwtHelper.isTokenExpired(token);
   }
